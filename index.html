@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="https://www.iconpacks.net/icons/1/free-heart-icon-431-thumb.png"
+        type="image/x-icon" />
+    <link rel="stylesheet" href="./img/in.css">
+    <title>ฝากหาคนขี้ลืม</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+
+</head>
+
+<body class="flex items-center justify-center bg-white min-h-screen">
+    <div class="container mx-auto text-center mt-20 px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-1 gap-4 items-center">
+            <div>
+                <span class="font-bold text-xl sm:text-2xl md:text-3xl">ลืมยังง</span>
+                <img id="mainImage" src="./img/1.png" alt="Do you?" class="mx-auto mt-4" />
+            </div>
+            <div class="grid grid-cols-2 gap-4 mt-8">
+                <div>
+                    <button id="noButton" type="button"
+                        class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm sm:text-base md:text-lg lg:text-xl px-12 sm:px-16 md:px-20 py-6 sm:py-8 md:py-10 text-center"
+                        onmouseover="changeImage('./img/2.png')" onmouseout="resetImage()" onclick="handleNoClick()">
+                        <span class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold">ลืม</span>
+                    </button>
+                </div>
+                <div>
+                    <button id="loveButton" type="button"
+                        class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm sm:text-base md:text-lg lg:text-xl px-12 sm:px-16 md:px-20 py-6 sm:py-8 md:py-10 text-center"
+                        onmouseover="changeImage('./img/4.png')" onmouseout="resetImage()"
+                        onclick="redirectToPage('li.html')">
+                        <span class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold">ยังไม่ลืม</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let noClickCount = 0;
+
+        function changeImage(newSrc) {
+            document.getElementById("mainImage").src = newSrc;
+        }
+
+        function resetImage() {
+            document.getElementById("mainImage").src = "./img/1.png";
+        }
+
+        function handleNoClick() {
+            noClickCount++;
+            if (noClickCount < 4) {
+                shrinkNoButton();
+                moveNoButton();
+            } else {
+                redirectToPage('no.html');
+            }
+        }
+
+        function shrinkNoButton() {
+            const noButton = document.getElementById('noButton');
+            const currentPx = parseFloat(getComputedStyle(noButton).paddingLeft);
+            const currentPy = parseFloat(getComputedStyle(noButton).paddingTop);
+            const currentFontSize = parseFloat(getComputedStyle(noButton.querySelector('span')).fontSize);
+
+            noButton.style.padding = `${currentPy * 0.8}px ${currentPx * 0.8}px`;
+            noButton.querySelector('span').style.fontSize = `${currentFontSize * 0.8}px`;
+        }
+
+        function moveNoButton() {
+            const noButton = document.getElementById('noButton');
+            const container = noButton.parentElement;
+            const containerRect = container.getBoundingClientRect();
+            const buttonRect = noButton.getBoundingClientRect();
+
+            const maxLeft = containerRect.width - buttonRect.width;
+            const maxTop = containerRect.height - buttonRect.height;
+
+            const randomLeft = Math.random() * maxLeft;
+            const randomTop = Math.random() * maxTop;
+
+            noButton.style.position = 'absolute';
+            noButton.style.left = `${randomLeft}px`;
+            noButton.style.top = `${randomTop}px`;
+        }
+
+        function redirectToPage(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+
+</html>

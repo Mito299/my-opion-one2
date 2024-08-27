@@ -1,0 +1,22 @@
+#noButton {
+    position: relative;
+    transition: transform 0.3s ease, padding 0.3s ease;
+}
+
+#noButton:hover {
+    transform: scale(1.05) rotate(-5deg);
+}
+
+#loveButton {
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+#loveButton:hover {
+    transform: scale(1.05) rotate(5deg);
+    background-image: linear-gradient(to right, #ff0077, #ff5599);
+}
+
+/* h1 ขนาดตัวหนังสือ */
+h1 {
+    font-size: 50px;
+}
